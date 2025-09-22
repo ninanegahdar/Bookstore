@@ -8,17 +8,20 @@
     <h1>Books</h1>
     <table class="table table-striped">
     <tr>
-        <th>Title</th>
         <th>Author</th>
+        <th>Title</th>
         <th>ISBN</th>
         <th>Year</th>
 </tr>
     <tr th:each="book : ${books}">
-        <td th:text="${book.title}">Title</td>
+
         <td th:text="${book.author}">Author</td>
+        <td th:text="${book.title}">Title</td>
         <td th:text="${book.isbn}">ISBN</td>
         <td th:text="${book.publicationYear}">Year</td>
-        <td><a th:href="@{'/delete/{id}'(id=${book.id})}" class="btn btn-danger">Delete</a>
+        <td>
+            <a th:href="@{'/editbook/{id}'(id=${book.id})}" class="btn btn-primary">Edit</a>
+            <a th:href="@{'/delete/{id}'(id=${book.id})}" class="btn btn-danger">Delete</a>
         </td>
     </tr>
     </table>

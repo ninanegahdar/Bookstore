@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import backend.bookstore.domain.Book;
 import backend.bookstore.domain.BookRepository;
 
+
 @Controller
 public class BookController {
 
@@ -38,9 +39,23 @@ private BookRepository bookRepository;
     public String saveBook(Book book) {
         bookRepository.save(book);
         return "redirect:/booklist";
-}
+    }
 
-    @RequestMapping("/delete/{id}")
+    @GetMapping("/editbook/{id}")
+    public String getEditBook(@PathVariable(name="id") Long id, Model model) {
+        Book book = bookRepository.findById(id).get();
+        model.addAttribute("book", book);
+        return "editbook";
+    }
+
+    @PostMapping("/updatebook")
+    public String updateBook(Book book) {
+    bookRepository.save(book);
+    return "redirect:/booklist";
+    }
+
+
+    @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") Long id) {
         bookRepository.deleteById(id);
         return "redirect:/booklist";
