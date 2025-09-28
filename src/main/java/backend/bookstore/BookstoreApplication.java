@@ -33,9 +33,9 @@ public class BookstoreApplication {
 		categoryRepository.save(comic);
 
 		log.info("Save books:");
-		Book b1 = new Book("1984", "George Orwell", 1949, "9780451524935", 9.99);
-		Book b2 = new Book("Brave New World", "Aldous Huxley", 1932, "9780060850524", 8.99);
-		Book b3 = new Book("Fahrenheit 451", "Ray Bradbury", 1953, "9781451673319", 10.99);
+		Book b1 = new Book("1984", "George Orwell", 1949, "9780451524935", 9.99, scifi);
+		Book b2 = new Book("Brave New World", "Aldous Huxley", 1932, "9780060850524", 8.99, scifi);
+		Book b3 = new Book("Fahrenheit 451", "Ray Bradbury", 1953, "9781451673319", 10.99, drama);
 
 		repository.save(b1);
         repository.save(b2);
