@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Add Category</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+</head>
+<body>
+    <h1>Add Category</h1>
+    
+        <form th:action="@{/addcategory}" th:object="${category}" method="post">
+            <label for="name" class="form-label">Category</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter category name" required />
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/categorylist" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+    <div style="margin-top: 20px;">
+        <a href="/booklist">Booklist</a>
+    </div>
+</body>
+</html>
