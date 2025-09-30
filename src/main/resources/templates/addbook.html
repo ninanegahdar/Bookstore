@@ -29,6 +29,13 @@
             <input type="number" id="price" step="0.01" th:field="*{price}" />
             <div style="clear: both; display: block; height: 10px;"></div>
 
+            <label for="category">Category</label>
+            <select id="category" th:field="*{category}">
+            <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat.name}">Category</option>
+            </select>
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+
             <input type="submit" value="Save" />
         </form>
     </div>

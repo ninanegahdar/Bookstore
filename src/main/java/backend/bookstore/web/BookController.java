@@ -1,5 +1,8 @@
 package backend.bookstore.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import backend.bookstore.domain.Book;
 import backend.bookstore.domain.BookRepository;
+import backend.bookstore.domain.CategoryRepository;
 
 
 @Controller
@@ -17,6 +22,9 @@ public class BookController {
 
 @Autowired
 private BookRepository bookRepository;
+
+@Autowired
+private CategoryRepository categoryRepository;
 
     @GetMapping("/index")
     public String showIndex() {
@@ -29,9 +37,20 @@ private BookRepository bookRepository;
         return "booklist";
     }
 
+    @RequestMapping("/books")
+    public @ResponseBody List<Book> findAllBooks(){
+        return (List<Book>) bookRepository.findAll();
+    }
+    
+    @RequestMapping("/books/{id}")
+    public @ResponseBody Optional<Book> getOneBook(@PathVariable(name = "id") Long Id){
+        return bookRepository.findById(Id);
+    }
+
     @RequestMapping(value = "/add")
     public String addBook(Model model){
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
@@ -45,6 +64,7 @@ private BookRepository bookRepository;
     public String getEditBook(@PathVariable(name="id") Long id, Model model) {
         Book book = bookRepository.findById(id).get();
         model.addAttribute("book", book);
+        model.addAttribute("categories", categoryRepository.findAll());
         return "editbook";
     }
 
