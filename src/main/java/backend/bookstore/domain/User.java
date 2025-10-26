@@ -51,7 +51,7 @@ public class User {
         this.username = username;
     }
 
-    public String getPasswordHash() {
+    public String getPassword() {
         return passwordHash;
     }
 
