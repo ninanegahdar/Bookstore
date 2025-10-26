@@ -11,6 +11,10 @@ import backend.bookstore.domain.Book;
 import backend.bookstore.domain.BookRepository;
 import backend.bookstore.domain.Category;
 import backend.bookstore.domain.CategoryRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import backend.bookstore.domain.User;
+import backend.bookstore.domain.UserRepository;
+
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -21,7 +25,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository repository, CategoryRepository categoryRepository) {
+	public CommandLineRunner demo(BookRepository repository, CategoryRepository categoryRepository, UserRepository userRepository) {
 	return (args) -> {
 		log.info("Save sample categories:");
 		Category drama = new Category("Drama");
@@ -50,6 +54,19 @@ public class BookstoreApplication {
 	        for (Book book : repository.findAll()) {
 	        log.info(book.toString());
 			}
-		};
+
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        User user1 = new User("user", passwordEncoder.encode("user123"), "user@example.com", "USER");
+        User user2 = new User("admin", passwordEncoder.encode("admin123"), "admin@example.com", "ADMIN");
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+
+        log.info("Sample users saved:");
+        for (User u : userRepository.findAll()) {
+            log.info(u.toString());
+        }
 	}
+}
 }
