@@ -6,12 +6,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import backend.bookstore.domain.Book;
 import backend.bookstore.domain.BookRepository;
 import backend.bookstore.domain.Category;
 import backend.bookstore.domain.CategoryRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import backend.bookstore.domain.User;
 import backend.bookstore.domain.UserRepository;
 
@@ -67,6 +67,6 @@ public class BookstoreApplication {
         for (User u : userRepository.findAll()) {
             log.info(u.toString());
         }
-	}
+	};
 }
 }
