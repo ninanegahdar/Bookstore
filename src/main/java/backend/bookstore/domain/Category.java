@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 
-
 @Entity
 public class Category {
 
@@ -54,8 +53,6 @@ public class Category {
     public void setBooks(List<Book> books) {
     this.books = books;
 }
-
-
 
     @Override
     public String toString() {
