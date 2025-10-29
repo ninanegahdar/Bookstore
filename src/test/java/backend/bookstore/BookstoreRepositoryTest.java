@@ -5,10 +5,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import backend.bookstore.domain.Book;
 import backend.bookstore.domain.BookRepository;
@@ -17,7 +15,6 @@ import backend.bookstore.domain.CategoryRepository;
 import backend.bookstore.domain.User;
 import backend.bookstore.domain.UserRepository;
 
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class BookstoreRepositoryTest {
 
@@ -106,12 +103,12 @@ private UserRepository userRepository;
 
     @Test
     public void findByUsernameShouldReturnUser() {
-        User user = new User("admin", "adminpass", "admin@bookstore.com", "ADMIN");
+        User user = new User("uniqueuser", "adminpass", "unique@bookstore.com", "ADMIN");
         userRepository.save(user);
 
-        User found = userRepository.findByUsername("admin");
+        User found = userRepository.findByUsername("uniqueuser");
         assertThat(found).isNotNull();
-        assertThat(found.getEmail()).isEqualTo("admin@bookstore.com");
+        assertThat(found.getEmail()).isEqualTo("unique@bookstore.com");
     }
 
     @Test
